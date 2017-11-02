@@ -31,11 +31,11 @@ public class MainActivity extends AppCompatActivity {
 
         montlypayment = ((Double.parseDouble(editTextPrice.getText().toString())-Double.parseDouble(editTextDownpayment.getText().toString()))
                 +(Double.parseDouble(editTextPrice.getText().toString())-Double.parseDouble(editTextDownpayment.getText().toString()))
-                *Double.parseDouble(editTextInterest.getText().toString())*
+                *(Double.parseDouble(editTextInterest.getText().toString())/100)*
                 (Double.parseDouble(editTextRepayment.getText().toString())/12))
                 /Double.parseDouble(editTextRepayment.getText().toString());
 
-        if(Double.parseDouble(editTextRepayment.getText().toString())>Double.parseDouble(editTextSalary.getText().toString())*0.3)
+        if(montlypayment>Double.parseDouble(editTextSalary.getText().toString())*0.3)
             status = "Rejected";
         //Create an Intent
         Intent intent = new Intent(this, ResultActivity.class);
@@ -45,5 +45,13 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(LOAN_STATUS, status);
 
         startActivity(intent);
+    }
+
+    public void reset(View view){
+        editTextPrice.setText("");
+        editTextDownpayment.setText("");
+        editTextInterest.setText("");
+        editTextRepayment.setText("");
+        editTextSalary.setText("");
     }
 }
